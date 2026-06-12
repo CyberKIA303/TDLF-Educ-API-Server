@@ -17,7 +17,11 @@ class Book_Authors:
             INSERT INTO book_authors(book_authors_id, book_id, author_id)
             VALUES (%(u_id)s, %(book_id)s, %(author_id)s)
         """
-        values = {"book_id": book_id, "author_id": author_id}
+        values = {
+            "u_id": u_id,
+            "book_id": book_id,
+            "author_id": author_id
+        }
         response = execute_query_on_connection(nodes=nodes, query=query, values=values)
         return response
     
