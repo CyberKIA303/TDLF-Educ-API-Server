@@ -1,11 +1,12 @@
-from .. import incrypt
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto"
+)
 
 def hash_password(password: str):
-    return incrypt(password, True)
+    return pwd_context.hash(password)
 
 def verify_password(plain_password: str, hashed_password: str):
-    varify = incrypt(plain_password, True)
-    if varify == hashed_password:
-        return True
-    else:
-        return False
+    return pwd_context.verify(plain_password, hashed_password)
