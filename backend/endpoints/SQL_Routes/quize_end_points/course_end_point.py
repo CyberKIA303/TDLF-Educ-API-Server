@@ -4,6 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from fastapi import (APIRouter, HTTPException)
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
+from typing import Dict
 from . import Course
 
 CourseRoute = APIRouter(prefix="/course", tags=["Course"])
@@ -12,7 +13,7 @@ class course_body(BaseModel):
     name: str = None
     details: str = None
     limit: int = None
-    grade_availability: list = {
+    grade_availability: Dict[str, bool] = {
         "kinder": False,
         "grade_1": False,
         "grade_2": False,
