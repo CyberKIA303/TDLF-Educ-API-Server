@@ -80,7 +80,7 @@ class Book:
         values = {
             "book_name": book_name,
             "link": link,
-            "book_picture": pic_link,
+            "pic_link": pic_link,
             "osn": osn,
             "id": id
         }
