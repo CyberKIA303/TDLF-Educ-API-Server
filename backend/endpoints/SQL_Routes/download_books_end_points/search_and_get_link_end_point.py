@@ -4,6 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from fastapi import (APIRouter, HTTPException)
 from . import (Book, Author, Book_Authors)
 from fastapi.concurrency import run_in_threadpool
+import requests
 
 GetBookLinkRoute = APIRouter(prefix="/get_book_link", tags=["let be code and emortals"])
 
@@ -52,10 +53,13 @@ def search_book_online(title: str):
 async def get_and_retrive_book_data(title: str):
     try:
         response = Book.read_book_by("book_name", title)
-        check = response["data"]
+        print(response)
+        print(type(response))
+        check = response[0].get("data")
+        check = False
         if not check:
-            await run_in_threadpool(search_book_online, title)
+            search_book_online(title)
             response = Book.read_book_by("book_name", title)
         return response
     except Exception as e:
-        raise HTTPException(500, "Bad Request!")
+        raise HTTPException(500, Exception)
