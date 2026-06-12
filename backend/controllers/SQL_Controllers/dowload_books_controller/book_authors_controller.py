@@ -70,7 +70,7 @@ class Book_Authors:
         query = """
             UPDATE book_authors SET
             book_id = %(book_id)s,
-            author_id = %(author_id)s,
+            author_id = %(author_id)s
             WHERE book_authors_id = %(id)s
         """
         values = {
