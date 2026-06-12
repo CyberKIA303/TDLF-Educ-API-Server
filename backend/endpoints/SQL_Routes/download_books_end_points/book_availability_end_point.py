@@ -9,8 +9,8 @@ from . import Book_Availability
 BookAvailabilityRoute = APIRouter(prefix="/book_availability", tags=["Book Availability"])
 
 class book_availability_body(BaseModel):
-    school_id: int
-    book_id: int
+    school_id: str
+    book_id: str
 
 @BookAvailabilityRoute.post("/")
 async def create_book_availability(data: book_availability_body):
