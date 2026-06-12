@@ -5,6 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import (relationship, sessionmaker)
 from sqlalchemy import *
 from . import nodes
+import uuid
 os.environ["PGSSLMODE"] = "require"
 os.environ["PGSSLCERT"] = ""
 os.environ["PGSSLKEY"] = ""
@@ -13,7 +14,7 @@ Base = declarative_base()
 
 class Author(Base):
     __tablename__ = "author"
-    author_id = Column(UUID(as_uuid=True), primary_key=True)
+    author_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     author_name = Column(Text)
     osn = Column(Text)
     prime_class = relationship("Book_Authors", back_populates="foreign_class1")
@@ -21,7 +22,7 @@ class Author(Base):
 
 class Book(Base):
     __tablename__ = "book"
-    book_id = Column(UUID(as_uuid=True), primary_key=True)
+    book_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     book_name = Column(Text)
     link = Column(Text)
     book_picture = Column(Text)
@@ -32,7 +33,7 @@ class Book(Base):
 
 class Book_Authors(Base):
     __tablename__ = "book_authors"
-    book_authors_id = Column(UUID(as_uuid=True), primary_key=True)
+    book_authors_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     book_id = Column(UUID(as_uuid=True), ForeignKey("book.book_id"))
     author_id = Column(UUID(as_uuid=True), ForeignKey("author.author_id"))
     foreign_class = relationship("Book", back_populates="prime_class")
@@ -40,7 +41,7 @@ class Book_Authors(Base):
 
 class School(Base):
     __tablename__ = "school"
-    school_id = Column(UUID(as_uuid=True), primary_key=True)
+    school_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     school_name = Column(Text)
     school_address = Column(Text)
     school_level = Column(Text)
@@ -49,7 +50,7 @@ class School(Base):
 
 class Book_Availability(Base):
     __tablename__ = "book_availability"
-    book_availability_id = Column(UUID(as_uuid=True),primary_key=True)
+    book_availability_id = Column(UUID(as_uuid=True),primary_key=True, default=uuid.uuid4)
     school_id = Column(UUID(as_uuid=True),
     ForeignKey("school.school_id"))
     book_id = Column(UUID(as_uuid=True), ForeignKey("book.book_id"))
@@ -59,7 +60,7 @@ class Book_Availability(Base):
 
 class Course(Base):
     __tablename__ = "course"
-    course_id = Column(UUID(as_uuid=True), primary_key=True)
+    course_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     course_name = Column(Text)
     course_details = Column(Text)
     passing_score = Column(Integer)
@@ -83,7 +84,7 @@ class Course(Base):
 
 class Quiz(Base):
     __tablename__ = "quiz"
-    quiz_id = Column(UUID(as_uuid=True), primary_key=True)
+    quiz_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     question = Column(Text)
     quiz_type = Column(Integer)
     correct_answer = Column(Text)
@@ -94,7 +95,7 @@ class Quiz(Base):
 
 class Quiz_Content(Base):
     __tablename__ = "quiz_content"
-    quiz_content_id = Column(UUID(as_uuid=True), primary_key=True)
+    quiz_content_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     initial = Column(Text)
     content = Column(Text)
     quiz_id = Column(UUID(as_uuid=True), ForeignKey("quiz.quiz_id"))
@@ -102,7 +103,7 @@ class Quiz_Content(Base):
 
 class User_Info(Base):
     __tablename__ = "user_info"
-    user_info_id = Column(UUID(as_uuid=True), primary_key=True)
+    user_info_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     username = Column(Text)
     user_email = Column(Text, unique=True)
     user_password = Column(Text)
@@ -112,7 +113,7 @@ class User_Info(Base):
 
 class My_Course(Base):
     __tablename__ = "my_course"
-    my_course_id = Column(UUID(as_uuid=True), primary_key=True)
+    my_course_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_info_id = Column(UUID(as_uuid=True), ForeignKey("user_info.user_info_id"))
     course_id = Column(UUID(as_uuid=True), ForeignKey("course.course_id"))
     foreign_class = relationship("User_Info", back_populates="prime_class")
