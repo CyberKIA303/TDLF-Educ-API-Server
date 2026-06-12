@@ -67,7 +67,7 @@ async def read_course_by(search_by: str, str_search: str = None, num_search: int
         raise HTTPException(500, "Bad Request!")
     
 @CourseRoute.put("/")
-async def update_course(id: int, data: course_body):
+async def update_course(id: str, data: course_body):
     try:
         response = await run_in_threadpool(Course.update_course,
             id, data.name, data.details, data.limit, data.grade_availability
