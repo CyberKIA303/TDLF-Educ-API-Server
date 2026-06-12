@@ -12,7 +12,22 @@ class course_body(BaseModel):
     name: str = None
     details: str = None
     limit: int = None
-    grade_availability: list = None
+    grade_availability: list = {
+        "kinder": False,
+        "grade_1": False,
+        "grade_2": False,
+        "grade_3": False,
+        "grade_4": False,
+        "grade_5": False,
+        "grade_6": False,
+        "grade_7": False,
+        "grade_8": False,
+        "grade_9": False,
+        "grade_10": False,
+        "grade_11": False,
+        "grade_12": False,
+        "college": False
+    }
 
 @CourseRoute.post("/")
 async def create_course(data: course_body):
