@@ -79,7 +79,7 @@ async def update_course(id: str, data: course_body):
 @CourseRoute.delete("/")
 async def delete_course(id: str):
     try:
-        response = await run_in_threadpool(Course.update_course, id)
+        response = await run_in_threadpool(Course.delete_course, id)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")
