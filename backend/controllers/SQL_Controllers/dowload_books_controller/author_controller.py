@@ -45,31 +45,31 @@ class Author:
         return response
     
     def read_author_by(search: str, page: int = None):
-        ons: str = f"%{letters.uppercase(search)}%"
+        osn: str = f"%{letters.uppercase(search)}%"
         offset: int = 0
         if page:
             offset = page * 10
         query = """
             SELECT * FROM author
-            WHERE ons ILIKE %(ons)s
+            WHERE osn ILIKE %(osn)s
             ORDER BY author_name ASC
             LIMIT 10 OFFSET %(offset)s
         """
-        values = {"ons": ons, "offset": offset}
+        values = {"osn": osn, "offset": offset}
         response = execute_query_on_connection(nodes=nodes, query=query, values=values, value_return=True, returned_element=data)
         return response
     
     def update_author(id: str, name: str):
-        ons: str = letters.uppercase(name)
+        osn: str = letters.uppercase(name)
         query = """
             UPDATE author SET
             author_name = %(name)s,
-            ons = %(ons)s
+            osn = %(osn)s
             WHERE author_id = %(id)s
         """
         values = {
             "name": name,
-            "ons": ons,
+            "osn": osn,
             "id": id
         }
         response = execute_query_on_connection(nodes=nodes, query=query, values=values)
