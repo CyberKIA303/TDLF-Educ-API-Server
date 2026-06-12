@@ -11,16 +11,16 @@ class Auth:
         u_id = str(uuid.uuid4())
         query = """
         INSERT INTO user_info(user_info_id, username, user_email, user_password, user_status)
-        VALUES (%s,%s,%s,%s,%s)
+        VALUES (%(u_id)s,%(username)s,%(email)s,%(password)s,%(status)s)
         RETURNING user_info_id, username
         """
-        values = (
-            u_id,
-            username,
-            email,
-            hash_password(password),
-            "active"
-        )
+        values = {
+            "u_id": u_id,
+            "username": username,
+            "email": email,
+            "password": hash_password(password),
+            "status": "active"
+        }
         return execute_query_on_connection(
             nodes, query, values, True,
             [{"element_name":"user_id","element_row":0},
