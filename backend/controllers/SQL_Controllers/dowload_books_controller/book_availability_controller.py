@@ -2,6 +2,7 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection)
+import uuid
 
 data = [
     {"element_name": "book_availability_id", "element_row": 0},
@@ -11,11 +12,12 @@ data = [
     
 class Book_Availability:
     def create_book_availability(school_id: str, book_id: str):
+        u_id = str(uuid.uuid4())
         query = """
-            INSERT INTO book_availability(school_id, book_id)
-            VALUES (%(school_id)s, %(book_id)s)
+            INSERT INTO book_availability(book_availability_id, school_id, book_id)
+            VALUES (%(u_id)s, %(school_id)s, %(book_id)s)
         """
-        values = {"school_id": school_id, "book_id": book_id}
+        values = {"u_id": u_id, "school_id": school_id, "book_id": book_id}
         response = execute_query_on_connection(nodes=nodes, query=query, values=values)
         return response
     

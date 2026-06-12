@@ -3,17 +3,19 @@ from backend.controllers.SQL_Controllers.execution import execute_query_on_conne
 from backend.connection.SQL_Connection import nodes
 from backend.security.password_handler import hash_password, verify_password
 from backend.security.jwt_handler import create_access_token
+import uuid
 
 class Auth:
     @staticmethod
     def register(username, email, password):
+        u_id = str(uuid.uuid4())
         query = """
         INSERT INTO user_info(user_info_id, username, user_email, user_password, user_status)
         VALUES (%s,%s,%s,%s,%s)
         RETURNING user_info_id, username
         """
         values = (
-            str(uuid.uuid4()),
+            u_id,
             username,
             email,
             hash_password(password),

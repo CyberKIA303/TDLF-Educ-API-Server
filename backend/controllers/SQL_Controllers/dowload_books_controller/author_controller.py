@@ -2,6 +2,7 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection, letters)
+import uuid
 
 data: list = [
     {"element_name": "author_id",   "element_row": 0},
@@ -10,13 +11,14 @@ data: list = [
 
 class Author:
     def create_author(name: str):
+        u_id = str(uuid.uuid4())
         name = letters.camelcase(name)
         osn: str = letters.uppercase(name)
         query = """
-            INSERT INTO author(author_name, osn)
-            VALUES (%(name)s, %(osn)s)
+            INSERT INTO author(author_id, author_name, osn)
+            VALUES (%(u_id)s, %(name)s, %(osn)s)
         """
-        values = {"name": name, "osn": osn}
+        values = {"u_id": u_id, "name": name, "osn": osn}
         response = execute_query_on_connection(nodes=nodes, query=query, values=values)
         return response
     

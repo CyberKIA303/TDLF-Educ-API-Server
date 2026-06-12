@@ -3,6 +3,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection, letters)
 import datetime
+import uuid
 
 data = [
     {"element_name": "book_id",      "element_row": 0},
@@ -13,12 +14,14 @@ data = [
     
 class Book:
     def create_book(book_name: str, link: str, pic_link: str):
+        u_id = str(uuid.uuid4())
         uppercase: str = letters.uppercase(book_name)
         query = """
-            INSERT INTO book(book_name, link, book_picture, osn)
-            VALUES (%(book_name)s, %(link)s, %(pic_link)s, %(uppercase)s)
+            INSERT INTO book(book_id, book_name, link, book_picture, osn)
+            VALUES (%(u_id)s, %(book_name)s, %(link)s, %(pic_link)s, %(uppercase)s)
         """
         values = {
+            "u_id": u_id,
             "book_name": book_name,
             "link": link,
             "pic_link": pic_link,

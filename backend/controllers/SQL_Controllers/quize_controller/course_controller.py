@@ -3,6 +3,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection, letters)
 from fastapi import HTTPException
+import uuid
 
 data = [
     {"element_name": "course_id",      "element_row": 0},
@@ -27,6 +28,7 @@ data = [
     
 class Course:
     def create_course(name: str = "New Course", details: str = "N/A", limit: int = 50, grade_availability: list = {"None"}):
+        u_id = str(uuid.uuid4())
         if "None" in grade_availability:
             grade_availability = {
                 "kinder": False,
@@ -48,17 +50,18 @@ class Course:
         osn: str = letters.uppercase(name)
         query = """
             INSERT INTO course(
-                course_name, course_details, passing_score, osn, kinder,
+                course_id, course_name, course_details, passing_score, osn, kinder,
                 grade_1, grade_2, grade_3, grade_4, grade_5, grade_6, grade_7,
                 grade_8, grade_9, grade_10, grade_11, grade_12, college
             )
             VALUES (
-                %(name)s, %(details)s, %(limit)s, %(osn)s, %(kd)s,
+                %(u_id)s, %(name)s, %(details)s, %(limit)s, %(osn)s, %(kd)s,
                 %(g1)s, %(g2)s, %(g3)s, %(g4)s, %(g5)s, %(g6)s, %(g7)s,
                 %(g8)s, %(g9)s, %(g10)s, %(g11)s, %(g12)s, %(clg)s
             )
         """
         values = {
+            "u_id": u_id,
             "name": name,
             "details": details,
             "limit": limit,

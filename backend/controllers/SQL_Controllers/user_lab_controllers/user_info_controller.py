@@ -4,6 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection, letters)
 from fastapi import HTTPException
 from backend.security.password_handler import hash_password
+import uuid
 
 data = [
     {"element_name": "user_info_id",  "element_row": 0},
@@ -14,12 +15,14 @@ data = [
     
 class User_Info:
     def create_user_info(name: str, email: str, password: str, status: str):
+        u_id = str(uuid.uuid4())
         ons: str = letters.uppercase(name)
         query = """
-            INSERT INTO user_info(username, user_email, user_password, user_status, ons)
-            VALUES (%(name)s, %(email)s, %(password)s, %(status)s, %(ons)s)
+            INSERT INTO user_info(user_info_id, username, user_email, user_password, user_status, ons)
+            VALUES (%(u_id)s, %(name)s, %(email)s, %(password)s, %(status)s, %(ons)s)
         """
         values = {
+            "u_id": u_id,
             "name": name,
             "email": email,
             "password": hash_password(password),

@@ -2,6 +2,7 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection, letters)
+import uuid
 
 data = [
     {"element_name": "my_course_id", "element_row": 0},
@@ -11,11 +12,13 @@ data = [
 
 class My_Course:
     def create_my_course(user: str, course: str):
+        u_id = str(uuid.uuid4())
         query = """
-            INSERT INTO my_course(user_info_id, course_id)
-            VALUES (%(user)s, %(course)s)
+            INSERT INTO my_course(my_course_id, user_info_id, course_id)
+            VALUES (%(u_id)s, %(user)s, %(course)s)
         """
         values = {
+            "u_id": u_id,
             "user": user,
             "course": course
         }
