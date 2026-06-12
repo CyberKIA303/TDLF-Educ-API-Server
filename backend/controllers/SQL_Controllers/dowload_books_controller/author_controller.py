@@ -11,12 +11,12 @@ data: list = [
 class Author:
     def create_author(name: str):
         name = letters.camelcase(name)
-        ons: str = letters.uppercase(name)
+        osn: str = letters.uppercase(name)
         query = """
-            INSERT INTO author(author_name, ons)
-            VALUES (%(name)s, %(ons)s)
+            INSERT INTO author(author_name, osn)
+            VALUES (%(name)s, %(osn)s)
         """
-        values = {"name": name, "ons": ons}
+        values = {"name": name, "osn": osn}
         response = execute_query_on_connection(nodes=nodes, query=query, values=values)
         return response
     
