@@ -21,7 +21,7 @@ async def create_book(data: book_body):
         )
         return response
     except Exception as e:
-        raise HTTPException(500, e)
+        raise HTTPException(500, "Bad Request!")
     
 @BookRoute.get("/")
 async def read_book(page: int = None):
