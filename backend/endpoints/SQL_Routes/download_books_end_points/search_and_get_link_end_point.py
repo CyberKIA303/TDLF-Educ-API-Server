@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from fastapi import (APIRouter, HTTPException)
 from . import (Book, Author, Book_Authors)
 from fastapi.concurrency import run_in_threadpool
-import requests
+from fastapi.Request import request
 
 GetBookLinkRoute = APIRouter(prefix="/get_book_link", tags=["let be code and emortals"])
 
