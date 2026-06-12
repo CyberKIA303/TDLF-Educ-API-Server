@@ -1,10 +1,10 @@
-from .. import HumaCyper
+from .. import incrypt
 
 def hash_password(password: str):
-    return HumaCyper(password, "INCRYPT", complex=True)
+    return incrypt(password, True)
 
 def verify_password(plain_password: str, hashed_password: str):
-    varify = HumaCyper(plain_password, "INCRYPT", complex=True)
+    varify = incrypt(plain_password, True)
     if varify == hashed_password:
         return True
     else:
