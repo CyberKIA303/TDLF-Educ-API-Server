@@ -54,7 +54,7 @@ async def get_and_retrive_book_data(title: str):
         response = Book.read_book_by("book_name", title)
         check = response["data"]
         if not check:
-            await run_in_threadpool("search_book_online", title)
+            await run_in_threadpool(search_book_online, title)
             response = Book.read_book_by("book_name", title)
         return response
     except Exception as e:

@@ -5,14 +5,14 @@ from . import (nodes, execute_query_on_connection, letters)
 from fastapi import HTTPException
 from backend.security.password_handler import hash_password
 
-class User_Info:
-    data = [
-        {"element_name": "user_info_id",  "element_row": 0},
-        {"element_name": "username",      "element_row": 1},
-        {"element_name": "user_email",    "element_row": 2},
-        {"element_name": "user_status",   "element_row": 4} 
-    ]
+data = [
+    {"element_name": "user_info_id",  "element_row": 0},
+    {"element_name": "username",      "element_row": 1},
+    {"element_name": "user_email",    "element_row": 2},
+    {"element_name": "user_status",   "element_row": 4} 
+]
     
+class User_Info:
     def create_user_info(name: str, email: str, password: str, status: str):
         ons: str = letters.uppercase(name)
         query = """

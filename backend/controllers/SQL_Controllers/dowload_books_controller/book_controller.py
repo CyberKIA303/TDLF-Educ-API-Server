@@ -4,14 +4,14 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection, letters)
 import datetime
 
-class Book:
-    data = [
-        {"element_name": "book_id",      "element_row": 0},
-        {"element_name": "book_name",    "element_row": 1},
-        {"element_name": "link",         "element_row": 2},
-        {"element_name": "book_picture", "element_row": 3}
-    ]
+data = [
+    {"element_name": "book_id",      "element_row": 0},
+    {"element_name": "book_name",    "element_row": 1},
+    {"element_name": "link",         "element_row": 2},
+    {"element_name": "book_picture", "element_row": 3}
+]
     
+class Book:
     def create_book(book_name: str, link: str, pic_link: str):
         uppercase: str = letters.uppercase(book_name)
         query = """

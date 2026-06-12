@@ -3,12 +3,12 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection, letters)
 
+data: list = [
+    {"element_name": "author_id",   "element_row": 0},
+    {"element_name": "author_name", "element_row": 1}
+]
+
 class Author:
-    data = [
-        {"element_name": "author_id",   "element_row": 0},
-        {"element_name": "author_name", "element_row": 1}
-    ]
-    
     def create_author(name: str):
         name = letters.camelcase(name)
         ons: str = letters.uppercase(name)

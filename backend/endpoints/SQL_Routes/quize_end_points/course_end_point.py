@@ -6,7 +6,6 @@ from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from . import Course
 
-course: Course
 CourseRoute = APIRouter(prefix="/course", tags=["Course"])
 
 class course_body(BaseModel):
@@ -18,7 +17,7 @@ class course_body(BaseModel):
 @CourseRoute.post("/")
 async def create_course(data: course_body):
     try:
-        response = await run_in_threadpool(course.create_course,
+        response = await run_in_threadpool(Course.create_course,
             data.name, data.details, data.limit, data.grade_availability
         )
         return response
@@ -28,7 +27,7 @@ async def create_course(data: course_body):
 @CourseRoute.get("/")
 async def read_course(page: int = None):
     try:
-        response = await run_in_threadpool(course.read_course, page)
+        response = await run_in_threadpool(Course.read_course, page)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")
@@ -36,7 +35,7 @@ async def read_course(page: int = None):
 @CourseRoute.get("/id")
 async def read_course_by_id(id: int):
     try:
-        response = await run_in_threadpool(course.read_course_by_id, id)
+        response = await run_in_threadpool(Course.read_course_by_id, id)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")
@@ -44,7 +43,7 @@ async def read_course_by_id(id: int):
 @CourseRoute.get("/by")
 async def read_course_by(search_by: str, str_search: str = None, num_search: int = None, page: int = None):
     try:
-        response = await run_in_threadpool(course.read_course_by,
+        response = await run_in_threadpool(Course.read_course_by,
             search_by, str_search, num_search, page
         )
         return response
@@ -54,7 +53,7 @@ async def read_course_by(search_by: str, str_search: str = None, num_search: int
 @CourseRoute.put("/")
 async def update_course(id: int, data: course_body):
     try:
-        response = await run_in_threadpool(course.update_course,
+        response = await run_in_threadpool(Course.update_course,
             id, data.name, data.details, data.limit, data.grade_availability
         )
         return response
@@ -64,7 +63,7 @@ async def update_course(id: int, data: course_body):
 @CourseRoute.delete("/")
 async def delete_course(id: int):
     try:
-        response = await run_in_threadpool(course.update_course, id)
+        response = await run_in_threadpool(Course.update_course, id)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")

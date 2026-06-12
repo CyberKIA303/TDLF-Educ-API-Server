@@ -6,7 +6,6 @@ from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from . import Author
 
-author: Author
 AuthorRoute = APIRouter(prefix="/author", tags=["Author"])
 
 class author_body(BaseModel):
@@ -15,7 +14,7 @@ class author_body(BaseModel):
 @AuthorRoute.post("/")
 async def create_author(data: author_body):
     try:
-        response = await run_in_threadpool(author.create_author, data.name)
+        response = await run_in_threadpool(Author.create_author, data.name)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")
@@ -23,7 +22,7 @@ async def create_author(data: author_body):
 @AuthorRoute.get("/")
 async def read_author(page: int = None):
     try:
-        response = await run_in_threadpool(author.read_author, page)
+        response = await run_in_threadpool(Author.read_author, page)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")
@@ -31,7 +30,7 @@ async def read_author(page: int = None):
 @AuthorRoute.get("/id")
 async def read_author_by_id(id: str):
     try:
-        response = await run_in_threadpool(author.read_author_by_id, id)
+        response = await run_in_threadpool(Author.read_author_by_id, id)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")
@@ -39,7 +38,7 @@ async def read_author_by_id(id: str):
 @AuthorRoute.get("/by")
 async def read_author_by(search: str, page: int = None):
     try:
-        response = await run_in_threadpool(author.read_author_by, search, page)
+        response = await run_in_threadpool(Author.read_author_by, search, page)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")
@@ -47,7 +46,7 @@ async def read_author_by(search: str, page: int = None):
 @AuthorRoute.put("/")
 async def update_author(id: str, data: author_body):
     try:
-        response = await run_in_threadpool(author.update_author, id, data.name)
+        response = await run_in_threadpool(Author.update_author, id, data.name)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")
@@ -55,7 +54,7 @@ async def update_author(id: str, data: author_body):
 @AuthorRoute.delete("/")
 async def delete_author(id: str):
     try:
-        response = await run_in_threadpool(author.delete_author, id)
+        response = await run_in_threadpool(Author.delete_author, id)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")

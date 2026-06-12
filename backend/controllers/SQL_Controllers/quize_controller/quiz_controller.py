@@ -3,16 +3,16 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection)
 
-class Quiz:
-    data = [
-        {"element_name": "quiz_id",        "element_row": 0},
-        {"element_name": "question",       "element_row": 1},
-        {"element_name": "quiz_type",      "element_row": 2},
-        {"element_name": "correct_answer", "element_row": 3},
-        {"element_name": "reason",         "element_row": 4},
-        {"element_name": "course_id",      "element_row": 5}
-    ]
+data = [
+    {"element_name": "quiz_id",        "element_row": 0},
+    {"element_name": "question",       "element_row": 1},
+    {"element_name": "quiz_type",      "element_row": 2},
+    {"element_name": "correct_answer", "element_row": 3},
+    {"element_name": "reason",         "element_row": 4},
+    {"element_name": "course_id",      "element_row": 5}
+]
     
+class Quiz:
     def create_quiz(question: str, q_type: str, answer: str, course: int, reason: str = "N/A"):
         query = """
             INSERT INTO quiz(question, quiz_type, correct_answer, reason, course_id)

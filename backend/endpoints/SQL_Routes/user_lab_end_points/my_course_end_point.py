@@ -6,7 +6,6 @@ from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from . import My_Course
 
-my_course: My_Course
 MyCourseRoute = APIRouter(prefix="/my_course", tags=["My Course"])
 
 class my_course_body(BaseModel):
@@ -16,7 +15,7 @@ class my_course_body(BaseModel):
 @MyCourseRoute.post("/")
 async def create_my_course(data: my_course_body):
     try:
-        response = await run_in_threadpool(my_course.create_my_course,
+        response = await run_in_threadpool(My_Course.create_my_course,
             data.user, data.course
         )
         return response
@@ -26,7 +25,7 @@ async def create_my_course(data: my_course_body):
 @MyCourseRoute.get("/")
 async def read_my_course(user: str, page: int = None):
     try:
-        response = await run_in_threadpool(my_course.read_my_course,
+        response = await run_in_threadpool(My_Course.read_my_course,
             user, page
         )
         return response
@@ -36,7 +35,7 @@ async def read_my_course(user: str, page: int = None):
 @MyCourseRoute.get("/id")
 async def read_my_course_by_id(id: str):
     try:
-        response = await run_in_threadpool(my_course.read_my_course_by_id, id)
+        response = await run_in_threadpool(My_Course.read_my_course_by_id, id)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")
@@ -44,7 +43,7 @@ async def read_my_course_by_id(id: str):
 @MyCourseRoute.delete("/")
 async def delete_my_course(id: str):
     try:
-        response = await run_in_threadpool(my_course.delete_my_course, id)
+        response = await run_in_threadpool(My_Course.delete_my_course, id)
         return response
     except Exception as e:
         raise HTTPException(500, "Bad Request!")

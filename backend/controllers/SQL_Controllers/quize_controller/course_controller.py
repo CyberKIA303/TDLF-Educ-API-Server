@@ -4,28 +4,28 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection, letters)
 from fastapi import HTTPException
 
-class Course:
-    data = [
-        {"element_name": "course_id",      "element_row": 0},
-        {"element_name": "course_name",    "element_row": 1},
-        {"element_name": "course_details", "element_row": 2},
-        {"element_name": "passing_score",  "element_row": 3},
-        {"element_name": "kinder",         "element_row": 4},
-        {"element_name": "grade_1",        "element_row": 5},
-        {"element_name": "grade_2",        "element_row": 6},
-        {"element_name": "grade_3",        "element_row": 7},
-        {"element_name": "grade_4",        "element_row": 8},
-        {"element_name": "grade_5",        "element_row": 9},
-        {"element_name": "grade_6",        "element_row":10},
-        {"element_name": "grade_7",        "element_row":11},
-        {"element_name": "grade_8",        "element_row":12},
-        {"element_name": "grade_9",        "element_row":13},
-        {"element_name": "grade_10",       "element_row":14},
-        {"element_name": "grade_11",       "element_row":15},
-        {"element_name": "grade_12",       "element_row":16},
-        {"element_name": "college",        "element_row":17}
-    ]
+data = [
+    {"element_name": "course_id",      "element_row": 0},
+    {"element_name": "course_name",    "element_row": 1},
+    {"element_name": "course_details", "element_row": 2},
+    {"element_name": "passing_score",  "element_row": 3},
+    {"element_name": "kinder",         "element_row": 4},
+    {"element_name": "grade_1",        "element_row": 5},
+    {"element_name": "grade_2",        "element_row": 6},
+    {"element_name": "grade_3",        "element_row": 7},
+    {"element_name": "grade_4",        "element_row": 8},
+    {"element_name": "grade_5",        "element_row": 9},
+    {"element_name": "grade_6",        "element_row":10},
+    {"element_name": "grade_7",        "element_row":11},
+    {"element_name": "grade_8",        "element_row":12},
+    {"element_name": "grade_9",        "element_row":13},
+    {"element_name": "grade_10",       "element_row":14},
+    {"element_name": "grade_11",       "element_row":15},
+    {"element_name": "grade_12",       "element_row":16},
+    {"element_name": "college",        "element_row":17}
+]
     
+class Course:
     def create_course(name: str = "New Course", details: str = "N/A", limit: int = 50, grade_availability: list = {"None"}):
         if "None" in grade_availability:
             grade_availability = {

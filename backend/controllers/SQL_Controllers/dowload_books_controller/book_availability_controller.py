@@ -3,13 +3,13 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection)
 
-class Book_Availability:
-    data = [
-        {"element_name": "book_availability_id", "element_row": 0},
-        {"element_name": "school_id",            "element_row": 1},
-        {"element_name": "book_id",              "element_row": 2}
-    ]
+data = [
+    {"element_name": "book_availability_id", "element_row": 0},
+    {"element_name": "school_id",            "element_row": 1},
+    {"element_name": "book_id",              "element_row": 2}
+]
     
+class Book_Availability:
     def create_book_availability(school_id: str, book_id: str):
         query = """
             INSERT INTO book_availability(school_id, book_id)

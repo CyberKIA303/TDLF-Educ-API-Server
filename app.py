@@ -14,12 +14,6 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# app.mount("/static", StaticFiles(directory="./frontend/ui/html"), name="static")
-
-# @app.get("/", include_in_schema=False)
-# async def landing_page():
-#     return FileResponse("./frontend/ui/html/index.html")
-
 routes = get_all_routes()
 for route in routes:
     app.include_router(route)

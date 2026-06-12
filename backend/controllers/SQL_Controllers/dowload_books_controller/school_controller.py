@@ -3,15 +3,15 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection)
 
-class School:
-    data = [
-        {"element_name": "school_id",      "element_row": 0},
-        {"element_name": "school_name",    "element_row": 1},
-        {"element_name": "school_address", "element_row": 2},
-        {"element_name": "school_level",   "element_row": 3},
-        {"element_name": "school_picture", "element_row": 4}
-    ]
+data = [
+    {"element_name": "school_id",      "element_row": 0},
+    {"element_name": "school_name",    "element_row": 1},
+    {"element_name": "school_address", "element_row": 2},
+    {"element_name": "school_level",   "element_row": 3},
+    {"element_name": "school_picture", "element_row": 4}
+]
     
+class School:
     def create_school(school_name: str, address: str, level: str, pic: str):
         query = """
             INSERT INTO school(school_name, school_address, school_level, school_picture)
