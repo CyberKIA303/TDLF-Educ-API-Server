@@ -1,12 +1,11 @@
-from passlib.context import CryptContext
-
-pwd_context = CryptContext(
-    schemes=["bcrypt"],
-    deprecated="auto"
-)
+from ...include import *
 
 def hash_password(password: str):
-    return pwd_context.hash(password)
+    return HumaCyper(password, "INCRYPT", complex=True)
 
 def verify_password(plain_password: str, hashed_password: str):
-    return pwd_context.verify(plain_password, hashed_password)
+    varify = HumaCyper(plain_password, "INCRYPT", complex=True)
+    if varify == hashed_password:
+        return True
+    else:
+        return False
