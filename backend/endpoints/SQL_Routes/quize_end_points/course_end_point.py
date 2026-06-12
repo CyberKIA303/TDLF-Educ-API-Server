@@ -49,7 +49,7 @@ async def read_course(page: int = None):
         raise HTTPException(500, "Bad Request!")
     
 @CourseRoute.get("/id")
-async def read_course_by_id(id: int):
+async def read_course_by_id(id: str):
     try:
         response = await run_in_threadpool(Course.read_course_by_id, id)
         return response
@@ -77,7 +77,7 @@ async def update_course(id: str, data: course_body):
         raise HTTPException(500, "Bad Request!")
     
 @CourseRoute.delete("/")
-async def delete_course(id: int):
+async def delete_course(id: str):
     try:
         response = await run_in_threadpool(Course.update_course, id)
         return response
