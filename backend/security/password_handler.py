@@ -1,4 +1,4 @@
-from ...include import *
+from .. import HumaCyper
 
 def hash_password(password: str):
     return HumaCyper(password, "INCRYPT", complex=True)
