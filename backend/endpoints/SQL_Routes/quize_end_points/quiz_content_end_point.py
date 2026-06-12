@@ -24,7 +24,7 @@ async def create_quiz_content(data: quiz_content_body):
         raise HTTPException(500, "Bad Request!")
     
 @QuizContentRoute.get("/")
-async def read_quiz_content(quiz_id: int):
+async def read_quiz_content(quiz_id: str):
     try:
         response = await run_in_threadpool(Quiz_Content.read_quiz_content, quiz_id)
         return response
@@ -32,7 +32,7 @@ async def read_quiz_content(quiz_id: int):
         raise HTTPException(500, "Bad Request!")
     
 @QuizContentRoute.get("/id")
-async def read_quiz_content_by_id(id: int):
+async def read_quiz_content_by_id(id: str):
     try:
         response = await run_in_threadpool(Quiz_Content.read_quiz_content_by_id, id)
         return response
@@ -40,7 +40,7 @@ async def read_quiz_content_by_id(id: int):
         raise HTTPException(500, "Bad Request!")
     
 @QuizContentRoute.put("/")
-async def update_quiz_content(id: int, data: quiz_content_body):
+async def update_quiz_content(id: str, data: quiz_content_body):
     try:
         response = await run_in_threadpool(Quiz_Content.update_quiz_content,
             id, data.initial, data.content
@@ -50,7 +50,7 @@ async def update_quiz_content(id: int, data: quiz_content_body):
         raise HTTPException(500, "Bad Request!")
     
 @QuizContentRoute.delete("/")
-async def delete_quiz_content(id: int):
+async def delete_quiz_content(id: str):
     try:
         response = await run_in_threadpool(Quiz_Content.delete_quiz_content, id)
         return response
