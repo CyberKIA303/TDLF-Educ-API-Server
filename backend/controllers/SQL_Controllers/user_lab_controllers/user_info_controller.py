@@ -3,7 +3,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from . import (nodes, execute_query_on_connection, letters)
 from fastapi import HTTPException
-from backend.security.password_handler import hash_password
+from backend.security.password_handler import hash_password, verify_password
 import uuid
 
 data = [
