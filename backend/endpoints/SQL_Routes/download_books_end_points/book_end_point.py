@@ -16,12 +16,12 @@ class book_body(BaseModel):
 @BookRoute.post("/")
 async def create_book(data: book_body):
     try:
-        response = await run_in_threadpool(Book.create_book, data.book_name,
+        response = await run_in_threadpool(Book.create_book,
             data.book_name, data.link, data.pic_link
         )
         return response
     except Exception as e:
-        raise HTTPException(500, "Bad Request!")
+        raise HTTPException(500, e)
     
 @BookRoute.get("/")
 async def read_book(page: int = None):
